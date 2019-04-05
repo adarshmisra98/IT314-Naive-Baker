@@ -13,6 +13,7 @@ const getIngredientsList = (request, response) => {
     if (error) {
       throw error
     }
+	  done();
     response.status(200).json(results.rows)
   })
 }
@@ -25,6 +26,7 @@ const putIngredientsList = (request, response) => {
       if (error) {
           throw error
         }
+	  done();
         response.status(200).json(results.rows);
     })
   }
@@ -59,6 +61,8 @@ const putIngredientsList = (request, response) => {
       if (error) {
         throw error
       }
+	    
+	  done();
       response.status(200).json(results.rows)
     })
   }
@@ -99,6 +103,7 @@ pool.query(string, (error, results) => {
     throw error
   }
   
+	  done();
   response.status(200).json(results.rows)
 })
 
@@ -113,6 +118,8 @@ const addUser = (request,response) => {
     if (error) {
         throw error
       }
+	  
+	  done();
       response.status(200).json(results.rows);
   })
 }
@@ -124,6 +131,8 @@ const ingredientListFromId = (request,response) => {
     if (error) {
       throw error
     }
+	  
+	  done();
     response.status(200).json(results.rows)
   })
 }
@@ -134,6 +143,8 @@ const checkLikedRecipe = (request,response) => {
     if (error) {
       throw error
     }
+	  
+	  done();
     response.status(200).json(results.rows)
   })
 }
@@ -143,6 +154,8 @@ const getUsernameList= (request,response) => {
     if (error) {
       throw error
     }
+	  
+	  done();
     response.status(200).json(results.rows)
   })
 }
@@ -152,6 +165,8 @@ const getUsernameAndPasswordList = (request,response) => {
     if (error) {
       throw error
     }
+	  
+	  done();
     response.status(200).json(results.rows)
   })
 }
@@ -162,6 +177,8 @@ const getRecipes = (request, response) => {
     if (error) {
       throw error
     }
+	  
+	  done();
     rids=result.rows;    
         response.status(200).json(results.rows)
    })
@@ -175,12 +192,16 @@ const likeRecipe = (request, response) => {
     if (error) {
       throw error
     }
+	  
+	  done();
   });
   const strin2='INSERT into naiveBakerSchema.likeslog (userid,recipeid) values ('+request.body.userid+','+request.body.recipeid+')';
   pool.query(strin2,(error, results) => {
     if (error) {
       throw error
     }
+	  
+	  done();
   });
 }
 
@@ -191,12 +212,16 @@ const disLikeRecipe = (request, response) => {
     if (error) {
       throw error
     }
+	  
+	  done();
   });
   const strin2='DELETE from naiveBakerSchema.likeslog where userid='+request.body.userid+' and recipeid='+request.body.recipeid;
   pool.query(strin2,(error, results) => {
     if (error) {
       throw error
     }
+	  
+	  done();
   });
 }
   
@@ -206,6 +231,8 @@ const addRecipe = async(request,response) => {
   var recipeid;
   try{
     const res = await pool.query(strin);
+	  
+	  done();
     response.status(200).json(res.rows);
   }
   catch(err){
@@ -215,6 +242,8 @@ const addRecipe = async(request,response) => {
   let strng2='select recipeId from naiveBakerSchema.recipes order by recipeId desc limit 1';
   try {
     const res = await pool.query(strng2);
+	  
+	  done();
     recipeid=res.rows[0].recipeid;
   }
   catch(error){
@@ -227,6 +256,8 @@ const addRecipe = async(request,response) => {
       if (error) {
           throw error
         }
+	  
+	  done();
   });
   let ing=data.ingredient.split(',');
 
@@ -237,6 +268,8 @@ const addRecipe = async(request,response) => {
     if (error) {
         throw error
       }
+	  
+	  done();
       console.log(results.rows[0].ingredientid);
     //  const res = await pool.query(strin4);
       let strng5='insert into naiveBakerSchema.recipeingredient (recipeid,ingredientid,amountrequired ) values (\'' + results.rows[0].ingredientid +'\','+ recipeid+',\''+'0'+ '\')';
@@ -245,6 +278,8 @@ const addRecipe = async(request,response) => {
         if (error) {
             throw error
           }
+	      
+	  done();
         });
       });
     
@@ -258,6 +293,8 @@ const getCategories = (request, response) => {
     if (error) {
       throw error
     }   
+	  
+	  done();
     response.status(200).json(results.rows)
    })
 }
@@ -267,6 +304,8 @@ const getMealTypes = (request, response) => {
     if (error) {
       throw error
     }   
+	  
+	  done();
     response.status(200).json(results.rows)
    })
 }
@@ -276,6 +315,8 @@ const getCuisines = (request, response) => {
     if (error) {
       throw error
     }   
+	  
+	  done();
     response.status(200).json(results.rows)
    })
 }
@@ -285,6 +326,8 @@ const loggedInUser = (request, response) => {
     if (error) {
       throw error
     }   
+	  
+	  done();
     response.status(200).json(results.rows)
    })
 }
@@ -296,6 +339,8 @@ const loginUser = (request, response) => {
     if (error) {
       throw error
     }   
+	  
+	  done();
     response.status(200).json(results.rows)
    })
 }
@@ -305,6 +350,8 @@ const logoutUser = (request, response) => {
     if (error) {
       throw error
     }   
+	  
+	  done();
     response.status(200).json(results.rows)
    })
 }
